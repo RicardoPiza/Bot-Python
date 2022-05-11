@@ -1,0 +1,17 @@
+MANIFEST.in
+README.md
+VERSION
+requirements.txt
+setup.py
+botteste/__init__.py
+botteste/__main__.py
+botteste/bot.py
+botteste.egg-info/PKG-INFO
+botteste.egg-info/SOURCES.txt
+botteste.egg-info/dependency_links.txt
+botteste.egg-info/requires.txt
+botteste.egg-info/top_level.txt
+botteste/resources/comeco.png
+botteste/resources/copiar.png
+botteste/resources/excel.png
+botteste/resources/start.png
