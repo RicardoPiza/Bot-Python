@@ -4,8 +4,9 @@ import Web
 
 for r in range(1):
     Web.Entrar_no_site()
-    Desktop.Escolher_certificado()
-
+    Web.Formata_cnpj()
+    #Desktop.Escolher_certificado()
+    Web.FazerDownload()
 
 
 
