@@ -13,10 +13,13 @@ class Bot(DesktopBot):
 
         # Opens the BotCity website.
         # self.browse("http://www.botcity.dev")
-        if not self.find( "excel", matching=0.97, waiting_time=10000):
-            self.not_found("excel")
+        if not self.find( "entrada", matching=0.97, waiting_time=10000):
+            self.not_found("entrada")
         self.click()
-
+        if not self.find( "cert", matching=0.97, waiting_time=10000):
+            self.not_found("cert")
+        self.click()
+        
         # Uncomment to mark this task as finished on BotMaestro
         # self.maestro.finish_task(
         #     task_id=execution.task_id,
@@ -30,6 +33,8 @@ class Bot(DesktopBot):
 
 if __name__ == '__main__':
     Bot.main()
+
+
 
 
 
