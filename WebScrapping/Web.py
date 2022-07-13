@@ -11,7 +11,9 @@ class CaptadorXML():
         self.options.add_argument('--safebrowsing-disable-download-protection')
         self.options.add_argument("--disable-web-security")
         self.options.accept_insecure_certs = True
-        #options.add_argument("--headless")
+        """self.options.add_argument("--start-maximized")
+        self.options.add_argument("--window-size=1920, 1080")
+        self.options.add_argument("--headless")"""
         return self.options
 
     pasta = input(str("Digite a pasta para download: "))
@@ -40,6 +42,7 @@ class CaptadorXML():
             print("Carregando...")
             url = 'https://satsp.fazenda.sp.gov.br/COMSAT/Private/ConsultarLotesEnviados/PesquisaLotesEnviados.aspx'
             self.navegador.get("https://satsp.fazenda.sp.gov.br/COMSAT/Private/Default.aspx")
+            time.sleep(1)
             self.navegador.find_element(By.XPATH,  '//*[@id="nav"]/li[5]/a').click()
             self.navegador.find_element(By.XPATH, '//*[@id="conteudo_txtCNPJ_ContribuinteNro"]').send_keys(self.sem_mil_contra)
             self.navegador.find_element(By.XPATH, '//*[@id="conteudo_txtCNPJ_ContribuinteFilial"]').send_keys(self.mil_contra)
@@ -61,13 +64,12 @@ class CaptadorXML():
     
     def faz_downloads(self):
         try:
-            element = self.navegador.find_elements(By.LINK_TEXT, 'Download')
-            item_paginas = self.navegador.find_element(By.XPATH, '//*[@id="conteudo_lblPageCount"]')
-            qtd_paginas = int(item_paginas.text)
-            item = 0
             print("Baixando...")
-            for p in range(qtd_paginas):
-                next_button = self.navegador.find_element(By.XPATH, '//*[@id="conteudo_lnkBtnProxima"]')
+            paginas = self.navegador.find_element(By.XPATH, '//*[@id="conteudo_lblPageCount"]').text
+            indice = int(paginas)
+            for p in range(indice):
+                element = self.navegador.find_elements(By.LINK_TEXT, 'Download')
+                item = 0
                 for i in range(len(element)):
                     try:
                         arquivos = self.navegador.find_element(By.XPATH, f'//*[@id="conteudo_grvConsultarLotesEnviados_lkbDownloadXml_{item}"]')
@@ -77,12 +79,12 @@ class CaptadorXML():
                         print("Erro! tentando novamente...")
                         time.sleep(2)
                     item+=1
+                next_button = self.navegador.find_element(By.XPATH, '//*[@id="conteudo_lnkBtnProxima"]')
                 next_button.click()
-                item = 0
                 time.sleep(2)
-            print("Download concluído")
         except:
             print("Download concluído!")
+            self.navegador.close()
         #arquivos_disponiveis = p.read_html(navegador.find_element(by=By.XPATH, value='//*[@id="conteudo_grvConsultarLotesEnviados"]').get_attribute('outer.html'))
         #print(arquivos_disponiveis)
 
