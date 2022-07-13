@@ -1,15 +1,10 @@
-
-import Desktop
 import Web
 
-for r in range(1):
-    Web.Entrar_no_site()
-    Web.Formata_cnpj()
-    #Desktop.Escolher_certificado()
-    Web.NavegarAteArquivos()
-    Web.FazDownloads()
-
-
+w = Web.CaptadorXML()
+w.entrar_no_site()
+w.formata_cnpj()
+w.navegar_ate_arquivos()
+w.faz_downloads()
 
 
 
